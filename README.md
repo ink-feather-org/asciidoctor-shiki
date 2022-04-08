@@ -5,7 +5,7 @@
 This extension is available on npmjs.com
 
 ```shell
-$ node install asciidoctor-shiki
+$ node install @ink-feather-org/asciidoctor-shiki
 ```
 
 ## Usage
@@ -13,10 +13,13 @@ $ node install asciidoctor-shiki
 This extension is not designed for browser.
 You must not use this extension without Node.js.
 
-```js
-const asciidoctor = require('@asciidoctor/core')()
-const AsciidoctorShiki = require('asciidoctor-shiki')
+```ts
+import adoc from '@asciidoctor/core'
+import { AsciidoctorShiki } from '@ink-feather-org/asciidoctor-shiki'
+
+const asciidoctor = adoc()
 asciidoctor.SyntaxHighlighter.register('shiki', AsciidoctorShiki)
+
 const options = {
   attributes: {
     'source-highlighter': 'shiki',
@@ -35,7 +38,6 @@ console.log(asciidoctor.convert(document, options))
 1. Register this extension using `SyntaxHighlighter.register`
 2. Set the attribute `source-highlighter`
 3. Set the attribute `shiki-theme`
-
 
 ## Copyright and License
 

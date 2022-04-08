@@ -1,15 +1,15 @@
-const shiki = require('shiki')
-const deasync = require('deasync')
+import type { Asciidoctor } from '@asciidoctor/core'
 
-const AsciidoctorShiki = {
+import * as shiki from 'shiki'
+import deasync from 'deasync'
+
+export const AsciidoctorShiki: Asciidoctor.SyntaxHighlighterFunctions = {
   initialize(_name, _backend, { document }) {
-    const options = {}
-    if (document.hasAttribute('shiki-theme')) {
+    const options: shiki.HighlighterOptions = {}
+    if (document.hasAttribute('shiki-theme'))
       options.theme = document.getAttribute('shiki-theme')
-    }
     this.highlighter = deasync((cb) => {
-      shiki
-        .getHighlighter(options)
+      shiki.getHighlighter(options)
         .then(highlighter => {
           cb(undefined, highlighter)
         })
@@ -23,6 +23,3 @@ const AsciidoctorShiki = {
     return true
   }
 }
-
-AsciidoctorShiki.default = AsciidoctorShiki
-module.exports = AsciidoctorShiki

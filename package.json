@@ -1,36 +1,48 @@
 {
-  "name": "asciidoctor-shiki",
-  "version": "0.1.0",
+  "private": false,
+  "author": "TANIGUCHI Masaya",
   "description": "asciidoctor.js plugin for syntax highlight with shiki",
-  "main": "index.js",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
+  "license": "MIT",
+  "publishConfig": [
+    {
+      "registry": "https://registry.npmjs.org/"
+    },
+    {
+      "registry": "https://npm.pkg.github.com/"
+    }
+  ],
   "repository": {
     "type": "git",
-    "url": "git+ssh://git@github.com/tani/asciidoctor-shiki.git"
+    "url": "https://github.com/ink-feather-org/asciidoctor-shiki"
   },
+  "name": "@ink-feather-org/asciidoctor-shiki",
+  "version": "1.0.0",
+  "main": "dist/src/index.js",
+  "sideEffects": false,
+  "types": "dist/src/index.d.ts",
   "keywords": [
     "asciidoc",
     "asciidoctor",
     "shiki",
     "syntax-highlight"
   ],
-  "author": "TANIGUCHI Masaya",
-  "license": "MIT",
-  "bugs": {
-    "url": "https://github.com/tani/asciidoctor-shiki/issues"
+  "scripts": {
+    "prepublishOnly": "pnpm run build && npm-multi-publish",
+    "postpublish": "npm-multi-publish",
+    "test": "pnpm run build && node dist/test/test.js",
+    "build": "tsc && tsc --declaration --emitDeclarationOnly",
+    "clean": "shx rm -rf dist docs"
   },
-  "homepage": "https://github.com/tani/asciidoctor-shiki#readme",
   "devDependencies": {
-    "@asciidoctor/core": "^2.2.6"
+    "@asciidoctor/core": "^2.2.6",
+    "@types/deasync": "^0.1.2",
+    "shx": "^0.3.4",
+    "typescript": "^4.6.3",
+    "npm-multi-publish": "^2.2.0"
   },
   "dependencies": {
-    "deasync": "^0.1.24",
-    "shiki": "^0.10.0"
-  },
-  "files": [
-    "README.md",
-    "index.js"
-  ]
+    "deasync": "^0.1.26",
+    "shiki": "^0.10.1",
+    "tslib": "^2.3.1"
+  }
 }
